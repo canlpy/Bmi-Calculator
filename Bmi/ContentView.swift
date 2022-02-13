@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var sexuality = "male"
+    @State private var sexuality = ""
     @State private var heightType = ""
     @State private var weightType = ""
     @State private var height : Double = 130.0
@@ -21,10 +21,16 @@ struct ContentView: View {
    
     
     // buttons
-    @State private var maleButton  = false
     @State private var maleButtonColor = Color.black
-    @State private var femaleButton = false
     @State private var femaleButtonColor = Color.gray
+    @State private var activeButtonColor = Color.black
+    @State private var passiveButtonColor = Color.gray
+    @State private var inchButtonColor = Color.gray
+    @State private var cmButtonColor = Color.black
+    @State private var LbsButtonColor = Color.gray
+    @State private var kgButtonColor = Color.black
+    
+    
     
     func calculate()  {
         
@@ -47,14 +53,14 @@ struct ContentView: View {
                 Text("Bmi Calculator")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                    .multilineTextAlignment(.center)
+                    
                
                 HStack {
                     
                 Spacer()
                     Button("Male") {
-                        maleButtonColor = Color.black
-                        femaleButtonColor = Color.gray
+                        maleButtonColor = activeButtonColor
+                        femaleButtonColor = passiveButtonColor
                         sexuality = "male"
                        
                         
@@ -83,27 +89,45 @@ struct ContentView: View {
                 {
                     Spacer()
                         .frame(width: 30.0)
-                    Text("Inch")
+                    Button ("Inch") {
+                        inchButtonColor = activeButtonColor
+                        cmButtonColor = passiveButtonColor
+                        heightType = "Inch"
+                        
+                        
+                    }
                         .frame(width: 70.0, height: 60.0)
                         
                         
-                        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                        .background(inchButtonColor)
                     Spacer()
-                    Text("cm")
+                    Button ("cm") {
+                        cmButtonColor = activeButtonColor
+                        inchButtonColor = passiveButtonColor
+                        heightType = "cm"
+                    }
                         
                         .frame(width: 70.0, height: 60.0)
-                        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                        .background(cmButtonColor)
                     
                     Spacer()
-                    Text("Lbs")
+                    Button ("Lbs") {
+                        LbsButtonColor = activeButtonColor
+                        kgButtonColor = passiveButtonColor
+                        weightType = "kg"
+                    }
                         
                         .frame(width: 70.0, height: 60.0)
-                        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                        .background(LbsButtonColor)
                     Spacer()
-                    Text("kg")
+                    Button ("kg") {
+                        kgButtonColor = activeButtonColor
+                        LbsButtonColor = passiveButtonColor
+                        weightType = "Lbs"
+                    }
                         
                         .frame(width: 70.0, height: 60.0)
-                        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                        .background(kgButtonColor)
                     Spacer()
                         .frame(width: 30.0)
                     
