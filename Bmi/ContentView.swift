@@ -177,7 +177,10 @@ struct ContentView: View {
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                 
                 Spacer()
-                Text("Your Bmi "  + String(format: "%.1f", result))
+                Text("Your Bmi is "  + String(format: "%.1f", result))
+                    .font(.largeTitle)
+                   
+                    
                 
                     
                 Spacer()
