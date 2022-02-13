@@ -9,15 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var sexuality = ""
+    @State private var sexuality = "male"
     @State private var heightType = ""
     @State private var weightType = ""
     @State private var height : Double = 130.0
     @State private var weight = 60
     @State private var age = 30
     @State private var result : Double = 0.0
-    @State private var heightCm = 160.0
+    @State private var heightCm = 175.0
     @State private var isEditing = false
+   
+    
+    // buttons
+    @State private var maleButton  = false
+    @State private var maleButtonColor = Color.black
+    @State private var femaleButton = false
+    @State private var femaleButtonColor = Color.gray
     
     func calculate()  {
         
@@ -45,14 +52,26 @@ struct ContentView: View {
                 HStack {
                     
                 Spacer()
-            Text("Male")
-                
-                .frame(width: 150.0, height: 150.0).background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                    Button("Male") {
+                        maleButtonColor = Color.black
+                        femaleButtonColor = Color.gray
+                        sexuality = "male"
+                       
+                        
+                    }.frame(width: 150.0, height: 150.0).background(maleButtonColor)
+                    
+                    
+                    
+                   
                 
                 
             Spacer()
-            Text("Female")
-                .frame(width: 150.0, height: 150.0).cornerRadius(30).background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                    Button("Female") {
+                        femaleButtonColor = Color.black
+                        maleButtonColor = Color.gray
+                        sexuality = "female"
+                    }
+                .frame(width: 150.0, height: 150.0).background(femaleButtonColor)
                 
                 Spacer()
             
@@ -177,7 +196,7 @@ struct ContentView: View {
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                 
                 Spacer()
-                Text("Your Bmi is "  + String(format: "%.1f", result))
+                Text("Your Bmi is "  + String(format: "%.1f", result) + sexuality)
                     .font(.largeTitle)
                    
                     
