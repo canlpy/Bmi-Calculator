@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var sexuality = ""
-    @State private var heightType = ""
+    @State private var heightType = "cm"
     @State private var weightType = ""
     @State private var height : Double = 130.0
     @State private var weight = 60
@@ -18,6 +18,11 @@ struct ContentView: View {
     @State private var result : Double = 0.0
     @State private var heightCm = 175.0
     @State private var isEditing = false
+    @State private var sliderStart =  120.0
+    @State private var sliderEnd =  230.0
+    @State private var heightInc = 1.0
+    @State private var heightText = "Height 175 cm"
+    
    
     
     // buttons
@@ -32,6 +37,7 @@ struct ContentView: View {
     
     
     
+    
     func calculate()  {
         
     height = heightCm / 100
@@ -39,6 +45,19 @@ struct ContentView: View {
 
         
     }
+    
+    func heightValue() {
+        if heightType == "Inch" {
+            heightCm = 190
+        } else {
+            heightCm = 170
+        }
+    }
+    
+    
+    
+    
+    
     
     
     
@@ -94,6 +113,14 @@ struct ContentView: View {
                         cmButtonColor = passiveButtonColor
                         heightType = "Inch"
                         
+                        sliderStart = 40.0
+                        sliderEnd = 90.0
+                        heightInc = 0.1
+                        
+                        heightCm = heightCm * 0.3937
+                        
+                        
+                        
                         
                     }
                         .frame(width: 70.0, height: 60.0)
@@ -105,6 +132,13 @@ struct ContentView: View {
                         cmButtonColor = activeButtonColor
                         inchButtonColor = passiveButtonColor
                         heightType = "cm"
+                        
+                        sliderStart = 120.0
+                        sliderEnd = 230.0
+                        heightInc = 1.0
+                        
+                        heightCm = heightCm / 0.3937
+                        
                     }
                         
                         .frame(width: 70.0, height: 60.0)
@@ -135,22 +169,32 @@ struct ContentView: View {
                 }.font(.title)
                     .foregroundColor(Color.white)
                 
+                
+                
+                
+             
+            
+           
+                
+                
+                
                 VStack(alignment: .center) {
                     HStack{
-                       Text("Height \(Int(heightCm)) cm")
+                       Text("Height \((heightCm)) \(heightType)")
                   }.foregroundColor(.white).font(.title)
+                    
+                    
+                    
+                    
                     
                     Slider(
                         value: $heightCm,
-                            in: 120...230 ,
-                        step: 1
-                        )
-                       
+                        in: sliderStart...sliderEnd ,
+                        step: heightInc
+                    )
                     
                     
-                    
-                    
-                    }
+                }
                 .frame(width: 332.0, height: 150.0)
                 
                 .background(.gray)
@@ -210,7 +254,8 @@ struct ContentView: View {
                
                 
                 Button("Calculate"){
-                    calculate()
+                    calculate() ;
+                    
                     
                    
                     
@@ -220,13 +265,13 @@ struct ContentView: View {
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                 
                 Spacer()
-                Text("Your Bmi is "  + String(format: "%.1f", result) + sexuality)
+                Text("Your Bmi is "  + String(format: "%.1f", result))
                     .font(.largeTitle)
                    
                     
                 
                     
-                Spacer()
+                
                 
                    
                 
@@ -248,3 +293,8 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+       
+        
+       
