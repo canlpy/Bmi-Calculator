@@ -22,6 +22,7 @@ struct ContentView: View {
     @State private var sliderEnd =  230.0
     @State private var heightInc = 1.0
     @State private var heightText = "Height 175 cm"
+    @State private var heightSpecifier = "%.0f"
     
    
     
@@ -111,13 +112,14 @@ struct ContentView: View {
                     Button ("Inch") {
                         inchButtonColor = activeButtonColor
                         cmButtonColor = passiveButtonColor
-                        heightType = "Inch"
+                        heightType = "inch"
                         
                         sliderStart = 40.0
                         sliderEnd = 90.0
                         heightInc = 0.1
                         
                         heightCm = heightCm * 0.3937
+                        heightSpecifier = "%.1f"
                         
                         
                         
@@ -138,6 +140,7 @@ struct ContentView: View {
                         heightInc = 1.0
                         
                         heightCm = heightCm / 0.3937
+                        heightSpecifier = "%.0f"
                         
                     }
                         
@@ -172,7 +175,7 @@ struct ContentView: View {
                 
                 
                 
-             
+               
             
            
                 
@@ -180,7 +183,7 @@ struct ContentView: View {
                 
                 VStack(alignment: .center) {
                     HStack{
-                       Text("Height \((heightCm)) \(heightType)")
+                        Text("Height \(heightCm, specifier: heightSpecifier) \(heightType)")
                   }.foregroundColor(.white).font(.title)
                     
                     
