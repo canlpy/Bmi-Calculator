@@ -25,6 +25,8 @@ struct ContentView: View {
     @State private var sliderValue = 175.0
     @State private var heightValue = 0.0
     @State private var weightKg = 60
+    @State private var stepperValue = 60.0
+    
    
     @State private var heightSpecifier = "%.0f"
     
@@ -51,6 +53,11 @@ struct ContentView: View {
         } else {
             height = sliderValue / 100
             result = Double(weight) / (height * height)
+        }
+        if weightType == "kg" {
+            weight = Int(sliderValue / 2.20462262)
+        } else if weightType == "lbs" {
+            weight = Int((sliderValue * 2.20462262))
         }
         
     
@@ -129,6 +136,7 @@ struct ContentView: View {
                         sliderStart = 40.0
                         sliderEnd = 90.0
                         heightInc = 0.1
+                       
                         
                         sliderValue *= 0.3937
                         
@@ -166,6 +174,7 @@ struct ContentView: View {
                         LbsButtonColor = activeButtonColor
                         kgButtonColor = passiveButtonColor
                         weightType = "Lbs"
+                        stepperValue /= 2.20462262
                         
                     }
                         
@@ -176,6 +185,7 @@ struct ContentView: View {
                         kgButtonColor = activeButtonColor
                         LbsButtonColor = passiveButtonColor
                         weightType = "kg"
+                        stepperValue *= 2.20462262
                         
                         
                     }
@@ -201,18 +211,27 @@ struct ContentView: View {
                 VStack(alignment: .center) {
                     HStack{
                         
+                        
+                       
+                        
+                        
                         Text("Height \(sliderValue, specifier: heightSpecifier) \(heightType)")
+                        
                   }.foregroundColor(.white).font(.title)
                     
                     
+                  
+                        
+                        Slider(
+                            value: $sliderValue,
+                            in: sliderStart...sliderEnd ,
+                            step: heightInc
+                        )
+                        
                     
                     
                     
-                    Slider(
-                        value: $sliderValue,
-                        in: sliderStart...sliderEnd ,
-                        step: heightInc
-                    )
+                    
                     
                     
                 }
@@ -229,17 +248,17 @@ struct ContentView: View {
                     VStack{
                         Text("Weight")
                             
-                        Text(String(weight))
+                        Text(String(format: "%.0f", stepperValue))
                             
                         
                         HStack{
                             Button("-") {
-                                weight -= 1
+                                stepperValue -= 1
                             }
                                 
                             
                             Button("+") {
-                                weight += 1
+                                stepperValue += 1
                             }
                             
                         }
