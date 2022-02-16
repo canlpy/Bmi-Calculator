@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @State private var sexuality = ""
     @State private var heightType = "cm"
-    @State private var weightType = ""
+    @State private var weightType = "kg"
     @State private var height : Double = 130.0
     @State private var weight = 60
     @State private var age = 30
@@ -55,9 +55,9 @@ struct ContentView: View {
             result = Double(weight) / (height * height)
         }
         if weightType == "kg" {
-            weight = Int(sliderValue / 2.20462262)
+            weight = Int(stepperValue)
         } else if weightType == "lbs" {
-            weight = Int((sliderValue * 2.20462262))
+            weight = Int((stepperValue * 2.20462262))
         }
         
     
@@ -131,14 +131,11 @@ struct ContentView: View {
                     Button ("Inch") {
                         inchButtonColor = activeButtonColor
                         cmButtonColor = passiveButtonColor
+                        
+                        if heightType == "cm" {
                         heightType = "inch"
-                        
-                        sliderStart = 40.0
-                        sliderEnd = 90.0
-                        heightInc = 0.1
-                       
-                        
                         sliderValue *= 0.3937
+                        }
                         
                         heightSpecifier = "%.1f"
                         
@@ -154,13 +151,13 @@ struct ContentView: View {
                     Button ("cm") {
                         cmButtonColor = activeButtonColor
                         inchButtonColor = passiveButtonColor
+                        
+                        if heightType == "inch" {
+                        
                         heightType = "cm"
-                        
-                        sliderStart = 120.0
-                        sliderEnd = 230.0
-                        heightInc = 1.0
-                        
-                       sliderValue /= 0.3937
+                        sliderValue /= 0.3937
+                            
+                        }
                         
                         heightSpecifier = "%.0f"
                         
@@ -173,8 +170,11 @@ struct ContentView: View {
                     Button ("Lbs") {
                         LbsButtonColor = activeButtonColor
                         kgButtonColor = passiveButtonColor
-                        weightType = "Lbs"
-                        stepperValue /= 2.20462262
+                        if weightType == "kg" {
+                            weightType = "Lbs"
+                            stepperValue /= 2.20462262
+                        }
+                        
                         
                     }
                         
@@ -184,8 +184,12 @@ struct ContentView: View {
                     Button ("kg") {
                         kgButtonColor = activeButtonColor
                         LbsButtonColor = passiveButtonColor
+                        
+                        if weightType == "Lbs" {
                         weightType = "kg"
-                        stepperValue *= 2.20462262
+                            stepperValue *= 2.20462262
+                        }
+                        
                         
                         
                     }
@@ -219,14 +223,24 @@ struct ContentView: View {
                         
                   }.foregroundColor(.white).font(.title)
                     
-                    
-                  
+                    if heightType == "cm" {
                         
                         Slider(
                             value: $sliderValue,
-                            in: sliderStart...sliderEnd ,
-                            step: heightInc
+                            in: 120...230 ,
+                            step: 1.0
                         )
+                    } else if heightType == "inch" {
+                     
+                        Slider(
+                            value: $sliderValue,
+                            in: 40...90 ,
+                            step: 0.1
+                        )
+                    }
+                  
+                        
+                        
                         
                     
                     
