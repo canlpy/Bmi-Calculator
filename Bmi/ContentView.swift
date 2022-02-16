@@ -17,11 +17,15 @@ struct ContentView: View {
     @State private var age = 30
     @State private var result : Double = 0.0
     @State private var heightCm = 175.0
+    @State private var heightInch = 60.0
     @State private var isEditing = false
     @State private var sliderStart =  120.0
     @State private var sliderEnd =  230.0
     @State private var heightInc = 1.0
-    @State private var heightText = "Height 175 cm"
+    @State private var sliderValue = 175.0
+    @State private var heightValue = 0.0
+    @State private var weightKg = 60
+   
     @State private var heightSpecifier = "%.0f"
     
    
@@ -40,21 +44,22 @@ struct ContentView: View {
     
     
     func calculate()  {
-        
-    height = heightCm / 100
-        result = Double(weight) / (height * height)
-
-        
-    }
-    
-    func heightValue() {
-        if heightType == "Inch" {
-            heightCm = 190
+        if heightType == "inch" {
+            heightInch =  sliderValue * 2.54
+            height = heightInch / 100
+            result = Double(weight) / (height * height)
         } else {
-            heightCm = 170
+            height = sliderValue / 100
+            result = Double(weight) / (height * height)
         }
-    }
+        
     
+}
+   
+     
+    
+    
+ 
     
     
     
@@ -67,6 +72,13 @@ struct ContentView: View {
     
     
     var body: some View {
+        
+        
+        
+        
+     
+        
+        
         ZStack(alignment: .bottom ) {
             VStack{
                 Spacer()
@@ -118,7 +130,8 @@ struct ContentView: View {
                         sliderEnd = 90.0
                         heightInc = 0.1
                         
-                        heightCm = heightCm * 0.3937
+                        sliderValue *= 0.3937
+                        
                         heightSpecifier = "%.1f"
                         
                         
@@ -139,7 +152,8 @@ struct ContentView: View {
                         sliderEnd = 230.0
                         heightInc = 1.0
                         
-                        heightCm = heightCm / 0.3937
+                       sliderValue /= 0.3937
+                        
                         heightSpecifier = "%.0f"
                         
                     }
@@ -151,7 +165,8 @@ struct ContentView: View {
                     Button ("Lbs") {
                         LbsButtonColor = activeButtonColor
                         kgButtonColor = passiveButtonColor
-                        weightType = "kg"
+                        weightType = "Lbs"
+                        
                     }
                         
                         .frame(width: 70.0, height: 60.0)
@@ -160,7 +175,9 @@ struct ContentView: View {
                     Button ("kg") {
                         kgButtonColor = activeButtonColor
                         LbsButtonColor = passiveButtonColor
-                        weightType = "Lbs"
+                        weightType = "kg"
+                        
+                        
                     }
                         
                         .frame(width: 70.0, height: 60.0)
@@ -183,7 +200,8 @@ struct ContentView: View {
                 
                 VStack(alignment: .center) {
                     HStack{
-                        Text("Height \(heightCm, specifier: heightSpecifier) \(heightType)")
+                        
+                        Text("Height \(sliderValue, specifier: heightSpecifier) \(heightType)")
                   }.foregroundColor(.white).font(.title)
                     
                     
@@ -191,7 +209,7 @@ struct ContentView: View {
                     
                     
                     Slider(
-                        value: $heightCm,
+                        value: $sliderValue,
                         in: sliderStart...sliderEnd ,
                         step: heightInc
                     )
