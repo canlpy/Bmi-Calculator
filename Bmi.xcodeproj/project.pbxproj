@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		366ADBC127CE7E590099BD98 /* sexuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ADBC027CE7E590099BD98 /* sexuality.swift */; };
 		368009E127B67B1C005F6121 /* BmiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368009E027B67B1C005F6121 /* BmiApp.swift */; };
 		368009E327B67B1C005F6121 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368009E227B67B1C005F6121 /* ContentView.swift */; };
 		368009E527B67B1E005F6121 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 368009E427B67B1E005F6121 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		366ADBC027CE7E590099BD98 /* sexuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sexuality.swift; sourceTree = "<group>"; };
 		368009DD27B67B1C005F6121 /* Bmi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bmi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		368009E027B67B1C005F6121 /* BmiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmiApp.swift; sourceTree = "<group>"; };
 		368009E227B67B1C005F6121 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			children = (
 				368009E027B67B1C005F6121 /* BmiApp.swift */,
 				368009E227B67B1C005F6121 /* ContentView.swift */,
+				366ADBC027CE7E590099BD98 /* sexuality.swift */,
 				368009E427B67B1E005F6121 /* Assets.xcassets */,
 				368009E627B67B1E005F6121 /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				366ADBC127CE7E590099BD98 /* sexuality.swift in Sources */,
 				368009E327B67B1C005F6121 /* ContentView.swift in Sources */,
 				368009E127B67B1C005F6121 /* BmiApp.swift in Sources */,
 			);

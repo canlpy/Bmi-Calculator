@@ -94,34 +94,7 @@ struct ContentView: View {
                     .fontWeight(.semibold)
                     
                
-                HStack {
-                    
-                Spacer()
-                    Button("Male") {
-                        maleButtonColor = activeButtonColor
-                        femaleButtonColor = passiveButtonColor
-                        sexuality = "male"
-                       
-                        
-                    }.frame(width: 150.0, height: 150.0).background(maleButtonColor)
-                    
-                    
-                    
-                   
-                
-                
-            Spacer()
-                    Button("Female") {
-                        femaleButtonColor = Color.black
-                        maleButtonColor = Color.gray
-                        sexuality = "female"
-                    }
-                .frame(width: 150.0, height: 150.0).background(femaleButtonColor)
-                
-                Spacer()
-            
-            }.font(.largeTitle)
-                    .foregroundColor(Color.white)
+                sexView(maleButtonCol: maleButtonColor, femaleButtonCol: femaleButtonColor, activeButtonCol: activeButtonColor, passiveButtonCol: passiveButtonColor, sex: sexuality)
                     
                 
                 HStack(alignment: .center)
@@ -352,3 +325,4 @@ struct ContentView_Previews: PreviewProvider {
        
         
        
+
