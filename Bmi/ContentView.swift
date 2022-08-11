@@ -27,10 +27,10 @@ struct ContentView: View {
     @State private var weightKg = 60
     @State private var stepperValue = 60.0
     
-   
+    
     @State private var heightSpecifier = "%.0f"
     
-   
+    
     
     // buttons
     @State private var maleButtonColor = Color.black
@@ -46,6 +46,14 @@ struct ContentView: View {
     
     
     func calculate()  {
+        
+        if weightType == "kg" {
+            weight = Int(stepperValue)
+            
+        } else {
+            weight = Int((stepperValue * 2.20462262))
+            
+        }
         if heightType == "inch" {
             heightInch =  sliderValue * 2.54
             height = heightInch / 100
@@ -54,37 +62,12 @@ struct ContentView: View {
             height = sliderValue / 100
             result = Double(weight) / (height * height)
         }
-        if weightType == "kg" {
-            weight = Int(stepperValue)
-        } else if weightType == "lbs" {
-            weight = Int((stepperValue * 2.20462262))
-        }
         
-    
-}
-   
-     
-    
-    
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        
+        
+    }
     
     var body: some View {
-        
-        
-        
-        
-     
-        
         
         ZStack(alignment: .bottom ) {
             VStack{
@@ -92,10 +75,10 @@ struct ContentView: View {
                 Text("Bmi Calculator")
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                    
-               
+                
+                
                 sexView(maleButtonCol: maleButtonColor, femaleButtonCol: femaleButtonColor, activeButtonCol: activeButtonColor, passiveButtonCol: passiveButtonColor, sex: sexuality)
-                    
+                
                 
                 HStack(alignment: .center)
                 {
@@ -106,8 +89,8 @@ struct ContentView: View {
                         cmButtonColor = passiveButtonColor
                         
                         if heightType == "cm" {
-                        heightType = "inch"
-                        sliderValue *= 0.3937
+                            heightType = "inch"
+                            sliderValue *= 0.3937
                         }
                         
                         heightSpecifier = "%.1f"
@@ -116,28 +99,27 @@ struct ContentView: View {
                         
                         
                     }
-                        .frame(width: 70.0, height: 60.0)
-                        
-                        
-                        .background(inchButtonColor)
+                    .frame(width: 70.0, height: 60.0)
+                    
+                    .background(inchButtonColor)
                     Spacer()
                     Button ("cm") {
                         cmButtonColor = activeButtonColor
                         inchButtonColor = passiveButtonColor
                         
                         if heightType == "inch" {
-                        
-                        heightType = "cm"
-                        sliderValue /= 0.3937
+                            
+                            heightType = "cm"
+                            sliderValue /= 0.3937
                             
                         }
                         
                         heightSpecifier = "%.0f"
                         
                     }
-                        
-                        .frame(width: 70.0, height: 60.0)
-                        .background(cmButtonColor)
+                    
+                    .frame(width: 70.0, height: 60.0)
+                    .background(cmButtonColor)
                     
                     Spacer()
                     Button ("Lbs") {
@@ -150,25 +132,25 @@ struct ContentView: View {
                         
                         
                     }
-                        
-                        .frame(width: 70.0, height: 60.0)
-                        .background(LbsButtonColor)
+                    
+                    .frame(width: 70.0, height: 60.0)
+                    .background(LbsButtonColor)
                     Spacer()
                     Button ("kg") {
                         kgButtonColor = activeButtonColor
                         LbsButtonColor = passiveButtonColor
                         
                         if weightType == "Lbs" {
-                        weightType = "kg"
+                            weightType = "kg"
                             stepperValue *= 2.20462262
                         }
                         
                         
                         
                     }
-                        
-                        .frame(width: 70.0, height: 60.0)
-                        .background(kgButtonColor)
+                    
+                    .frame(width: 70.0, height: 60.0)
+                    .background(kgButtonColor)
                     Spacer()
                         .frame(width: 30.0)
                     
@@ -179,9 +161,9 @@ struct ContentView: View {
                 
                 
                 
-               
-            
-           
+                
+                
+                
                 
                 
                 
@@ -189,12 +171,12 @@ struct ContentView: View {
                     HStack{
                         
                         
-                       
+                        
                         
                         
                         Text("Height \(sliderValue, specifier: heightSpecifier) \(heightType)")
                         
-                  }.foregroundColor(.white).font(.title)
+                    }.foregroundColor(.white).font(.title)
                     
                     if heightType == "cm" {
                         
@@ -204,17 +186,17 @@ struct ContentView: View {
                             step: 1.0
                         )
                     } else if heightType == "inch" {
-                     
+                        
                         Slider(
                             value: $sliderValue,
                             in: 40...90 ,
                             step: 0.1
                         )
                     }
-                  
-                        
-                        
-                        
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -227,22 +209,22 @@ struct ContentView: View {
                 .background(.gray)
                 
                 
-           
                 
-               
+                
+                
                 HStack{
                     Spacer()
                     VStack{
                         Text("Weight")
-                            
+                        
                         Text(String(format: "%.0f", stepperValue))
-                            
+                        
                         
                         HStack{
                             Button("-") {
                                 stepperValue -= 1
                             }
-                                
+                            
                             
                             Button("+") {
                                 stepperValue += 1
@@ -252,11 +234,11 @@ struct ContentView: View {
                     }.frame(width: 150.0, height: 150.0).background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                     
                     Spacer()
-                   
+                    
                     
                     VStack{
                         Text("Age")
-                            
+                        
                         Text(String(age))
                         
                         HStack{
@@ -271,20 +253,20 @@ struct ContentView: View {
                         }
                     }.frame(width: 150.0, height: 150.0).background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                     
-                
-                        Spacer()
+                    
+                    Spacer()
                     
                     
                 } .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color.white)
                 
-               
+                
                 
                 Button("Calculate"){
                     calculate() ;
                     
                     
-                   
+                    
                     
                 }.font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color.white)
@@ -294,16 +276,16 @@ struct ContentView: View {
                 Spacer()
                 Text("Your Bmi is "  + String(format: "%.1f", result))
                     .font(.largeTitle)
-                   
-                    
-                
-                    
                 
                 
-                   
+                
+                
+                
+                
+                
                 
             }
-           
+            
             
             
             
@@ -322,7 +304,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-       
-        
-       
+
+
+
 
